@@ -16,7 +16,7 @@ MonoBehaviour:
   animationDuration: 0.75
   comboWindowStart: 0
   comboWindowEnd: 0
-  damage: 1
+  damage: 15
   attackRange: 2
   attackOffset: {x: 0, y: 0, z: 0}
   canMove: 0

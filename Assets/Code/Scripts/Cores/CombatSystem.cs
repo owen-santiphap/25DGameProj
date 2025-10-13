@@ -156,7 +156,7 @@ public class CombatSystem : MonoBehaviour
             var enemyHealth = enemy.GetComponent<HealthSystem>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(1); // Or use attack.damage if you want float damage
+                enemyHealth.TakeDamage(attack.damage); // Or use attack.damage
             }
             
             // can notify the enemy of hit for knockback, etc.
