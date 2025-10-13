@@ -36,7 +36,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int hearts)
+    public void TakeDamage(float hearts)
     {
         if (IsDeflecting)
         {
@@ -47,7 +47,7 @@ public class HealthSystem : MonoBehaviour
     
         if (IsDead || IsInvincible) return;
         
-        currentHearts = Mathf.Max(0, currentHearts - hearts);
+        currentHearts = (int)Mathf.Max(0, currentHearts - hearts);
         _invincibilityTimer = invincibilityDuration;
         
         OnHealthChanged?.Invoke(currentHearts);
