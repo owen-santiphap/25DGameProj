@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3279297074992152917
+--- !u!114 &-6654108419390251323
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteGlow
+  m_Name: EnemyDeathMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 71ff13b5b87ca2d45a54dceb329714e3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _GlowTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8126f258aa30ac34aad9a6e5b359c721, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:

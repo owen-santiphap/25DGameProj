@@ -312,7 +312,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   knockbackDuration: 0.3
   animator: {fileID: 1645204742}
   spriteTransform: {fileID: 1162343749}
-  deathVFX: {fileID: 8117529121958471449, guid: 334f4c4331c7fd54fa5ecf0a6659214a, type: 3}
+  deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
 --- !u!114 &1162343748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2491,7 +2491,7 @@ MonoBehaviour:
   knockbackDuration: 0.3
   animator: {fileID: 1273862478}
   spriteTransform: {fileID: 2124504964}
-  deathVFX: {fileID: 8117529121958471449, guid: 334f4c4331c7fd54fa5ecf0a6659214a, type: 3}
+  deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
 --- !u!114 &2124504966
 MonoBehaviour:
   m_ObjectHideFlags: 0
