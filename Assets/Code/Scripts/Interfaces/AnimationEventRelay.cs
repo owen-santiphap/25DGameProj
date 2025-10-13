@@ -33,7 +33,7 @@ public class AnimationEventRelay : MonoBehaviour
     {
         if (_combatSystem != null)
         {
-            //Effects
+            _combatSystem.SpawnVFX();
         }
     }
 

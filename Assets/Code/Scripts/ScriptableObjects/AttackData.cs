@@ -19,4 +19,7 @@ public class AttackData : ScriptableObject
     [Header("Movement")]
     public bool canMove = false;
     public float movementSpeedMultiplier = 0f;
+    
+    [Header("Effects")]
+    public GameObject attackVFX;
 }

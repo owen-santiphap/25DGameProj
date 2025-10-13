@@ -10,6 +10,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Transform spriteTransform;
     
     private int _currentAttackIndex = 0;
     private float _attackTimer = 0f;
@@ -107,6 +108,25 @@ public class CombatSystem : MonoBehaviour
         
         // Deal damage - can call this from animation event for better timing
         DealDamage(attack);
+        
+        // Spawn VFX
+        if (attack.attackVFX != null)   
+        {
+            
+            var attackPosition = attackPoint.position + transform.TransformDirection(attack.attackOffset);
+        
+            // Start with the default rotation
+            var vfxRotation = attackPoint.rotation; 
+
+            // If the character is flipped, flip the VFX rotation
+            if (spriteTransform.localScale.x < 0)
+            {
+                vfxRotation *= Quaternion.Euler(0, 180f, 0);
+            }
+
+            // Instantiate with the corrected rotation
+            Instantiate(attack.attackVFX, attackPosition, vfxRotation);
+        }
     }
     
     // Call this from Animation Event for precise hit timing
@@ -124,7 +144,7 @@ public class CombatSystem : MonoBehaviour
         
         var hitEnemies = Physics.OverlapSphere(attackPosition, attack.attackRange, enemyLayer);
         
-        foreach (Collider enemy in hitEnemies)
+        foreach (var enemy in hitEnemies)
         {
             // Try to get health system from enemy
             var enemyHealth = enemy.GetComponent<HealthSystem>();
@@ -163,6 +183,19 @@ public class CombatSystem : MonoBehaviour
         {
             var attackPosition = attackPoint.position + transform.TransformDirection(attack.attackOffset);
             Gizmos.DrawWireSphere(attackPosition, attack.attackRange);
+        }
+    }
+
+    public void SpawnVFX()
+    {
+        if (_currentAttackIndex < attackCombo.Length)
+        {
+            var currentAttack = attackCombo[_currentAttackIndex];
+            if (currentAttack.attackVFX != null)
+            {
+                var attackPosition = attackPoint.position + transform.TransformDirection(currentAttack.attackOffset);
+                Instantiate(currentAttack.attackVFX, attackPosition, attackPoint.rotation);
+            }
         }
     }
 }

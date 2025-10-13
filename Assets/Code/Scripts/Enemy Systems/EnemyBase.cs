@@ -21,6 +21,7 @@ public class EnemyBase : MonoBehaviour, IHittable
     [Header("References")]
     [SerializeField] protected Animator animator;
     [SerializeField] protected Transform spriteTransform;
+    [SerializeField] protected GameObject deathVFX;
     
     protected HealthSystem HealthSystem;
     protected Transform PlayerTransform;
@@ -231,6 +232,10 @@ public class EnemyBase : MonoBehaviour, IHittable
     protected virtual void OnDeath()
     {
         CurrentState = EnemyState.Dead;
+        if (deathVFX != null)
+        {
+            Instantiate(deathVFX, transform.position, Quaternion.identity);
+        }
         
         if (animator != null)
         {
@@ -244,7 +249,7 @@ public class EnemyBase : MonoBehaviour, IHittable
         enabled = false;
         
         // Destroy after animation (or immediately)
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 0f);
     }
     
     protected virtual void UpdateAnimations()
