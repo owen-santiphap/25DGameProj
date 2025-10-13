@@ -111,18 +111,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Skill1"",
-                    ""type"": ""Button"",
+                    ""name"": ""Aim"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""c410b29a-c9ba-40bd-9ff3-b70921137517"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillProjectile"",
+                    ""type"": ""Button"",
+                    ""id"": ""9dce300a-df0e-46bf-8618-e5ca803d77e4"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Skill2"",
+                    ""name"": ""SkillDeflect"",
                     ""type"": ""Button"",
-                    ""id"": ""9dce300a-df0e-46bf-8618-e5ca803d77e4"",
+                    ""id"": ""9a4695f9-97dc-4369-bc23-34f42fa65a90"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -331,22 +340,44 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4eaf844d-7299-4463-bdf8-6d9d0385f6ca"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Skill1"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""453a81cc-01c1-42a4-8235-6c6cad7cf507"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""567093b8-a630-4754-8f53-af088a565276"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillProjectile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""683cdcc3-7710-4db4-98ed-0843d7db32ad"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Skill2"",
+                    ""action"": ""SkillDeflect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -359,8 +390,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Skill1 = m_Player.FindAction("Skill1", throwIfNotFound: true);
-        m_Player_Skill2 = m_Player.FindAction("Skill2", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_SkillProjectile = m_Player.FindAction("SkillProjectile", throwIfNotFound: true);
+        m_Player_SkillDeflect = m_Player.FindAction("SkillDeflect", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -443,8 +475,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Skill1;
-    private readonly InputAction m_Player_Skill2;
+    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_SkillProjectile;
+    private readonly InputAction m_Player_SkillDeflect;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -465,13 +498,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Skill1".
+        /// Provides access to the underlying input action "Player/Aim".
         /// </summary>
-        public InputAction @Skill1 => m_Wrapper.m_Player_Skill1;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Skill2".
+        /// Provides access to the underlying input action "Player/SkillProjectile".
         /// </summary>
-        public InputAction @Skill2 => m_Wrapper.m_Player_Skill2;
+        public InputAction @SkillProjectile => m_Wrapper.m_Player_SkillProjectile;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SkillDeflect".
+        /// </summary>
+        public InputAction @SkillDeflect => m_Wrapper.m_Player_SkillDeflect;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -504,12 +541,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @Skill1.started += instance.OnSkill1;
-            @Skill1.performed += instance.OnSkill1;
-            @Skill1.canceled += instance.OnSkill1;
-            @Skill2.started += instance.OnSkill2;
-            @Skill2.performed += instance.OnSkill2;
-            @Skill2.canceled += instance.OnSkill2;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @SkillProjectile.started += instance.OnSkillProjectile;
+            @SkillProjectile.performed += instance.OnSkillProjectile;
+            @SkillProjectile.canceled += instance.OnSkillProjectile;
+            @SkillDeflect.started += instance.OnSkillDeflect;
+            @SkillDeflect.performed += instance.OnSkillDeflect;
+            @SkillDeflect.canceled += instance.OnSkillDeflect;
         }
 
         /// <summary>
@@ -527,12 +567,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @Skill1.started -= instance.OnSkill1;
-            @Skill1.performed -= instance.OnSkill1;
-            @Skill1.canceled -= instance.OnSkill1;
-            @Skill2.started -= instance.OnSkill2;
-            @Skill2.performed -= instance.OnSkill2;
-            @Skill2.canceled -= instance.OnSkill2;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @SkillProjectile.started -= instance.OnSkillProjectile;
+            @SkillProjectile.performed -= instance.OnSkillProjectile;
+            @SkillProjectile.canceled -= instance.OnSkillProjectile;
+            @SkillDeflect.started -= instance.OnSkillDeflect;
+            @SkillDeflect.performed -= instance.OnSkillDeflect;
+            @SkillDeflect.canceled -= instance.OnSkillDeflect;
         }
 
         /// <summary>
@@ -588,18 +631,25 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Skill1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Aim" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSkill1(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Skill2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SkillProjectile" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSkill2(InputAction.CallbackContext context);
+        void OnSkillProjectile(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SkillDeflect" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkillDeflect(InputAction.CallbackContext context);
     }
 }

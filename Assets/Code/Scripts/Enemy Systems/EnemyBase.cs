@@ -162,22 +162,38 @@ public class EnemyBase : MonoBehaviour, IHittable
         DealDamageToPlayer();
     }
     
-    // Call this from animation event for precise timing
     public virtual void DealDamageToPlayer()
     {
         if (PlayerTransform == null) return;
-        
+
         var distanceToPlayer = Vector3.Distance(transform.position, PlayerTransform.position);
         if (distanceToPlayer <= attackRange)
         {
-            HealthSystem playerHealth = PlayerTransform.GetComponent<HealthSystem>();
+            var playerHealth = PlayerTransform.GetComponent<HealthSystem>();
+            var playerSkills = PlayerTransform.GetComponent<PlayerSkills>();
+
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(attackDamage);
+                if (playerSkills != null && playerSkills.IsDeflecting)
+                {
+                    Debug.Log("Player Deflected! Enemy takes damage.");
+                    
+                    var deflectData = playerSkills.DeflectSkill; 
+                    var damageToTake = (deflectData != null) ? deflectData.deflectDamage : 1;
+                    
+                    HealthSystem.TakeDamage(damageToTake);
+                    
+                    var knockbackDirection = (transform.position - PlayerTransform.position).normalized;
+                    OnHit(damageToTake, knockbackDirection);
+                }
+                else
+                {
+                    playerHealth.TakeDamage(attackDamage);
+                }
             }
         }
     }
-    
+
     protected virtual void FlipSprite(Vector3 direction)
     {
         if (spriteTransform != null && direction.x != 0)
@@ -225,7 +241,7 @@ public class EnemyBase : MonoBehaviour, IHittable
     {
         if (animator != null)
         {
-            animator.SetTrigger("Hurt");
+            //animator.SetTrigger("Hurt");
         }
     }
     

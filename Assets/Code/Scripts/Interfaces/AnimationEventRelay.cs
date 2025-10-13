@@ -4,20 +4,28 @@ public class AnimationEventRelay : MonoBehaviour
 {
     private CombatSystem _combatSystem;
     private PlayerController _playerController;
+    private EnemyBase _enemyBase;
 
     private void Awake()
     {
         _combatSystem = GetComponentInParent<CombatSystem>();
         _playerController = GetComponentInParent<PlayerController>();
+        _enemyBase = GetComponentInParent<EnemyBase>();
+        
 
         if (_combatSystem == null)
         {
-            Debug.LogWarning("CombatSystem not found on " + gameObject.name);
+            Debug.LogWarning($"CombatSystem not found on {gameObject.name}");
         }
 
         if (_playerController == null)
         {
-            Debug.LogWarning("PlayerController not found on " + gameObject.name);
+            Debug.LogWarning($"PlayerController not found on {gameObject.name}");
+        }
+
+        if (_enemyBase == null)
+        {
+            Debug.LogWarning($"EnemyBase not found on {gameObject.name}");
         }
     }
 
@@ -45,5 +53,13 @@ public class AnimationEventRelay : MonoBehaviour
     public void OnAnimationComplete()
     {
         
+    }
+
+    public void DealDamageToPlayer()
+    {
+        if (_enemyBase != null)
+        {
+            _enemyBase.DealDamageToPlayer();
+        }
     }
 }

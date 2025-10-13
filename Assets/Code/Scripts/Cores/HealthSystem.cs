@@ -21,6 +21,7 @@ public class HealthSystem : MonoBehaviour
     public int MaxHearts => maxHearts;
     public bool IsInvincible => _invincibilityTimer > 0;
     public bool IsDead { get; private set; }
+    public bool IsDeflecting { get; set; }
     
     private void Awake()
     {
@@ -37,6 +38,13 @@ public class HealthSystem : MonoBehaviour
     
     public void TakeDamage(int hearts)
     {
+        if (IsDeflecting)
+        {
+            Debug.Log("Attack Deflected!");
+            // add a deflect VFX/SFX trigger here later
+            return; 
+        }
+    
         if (IsDead || IsInvincible) return;
         
         currentHearts = Mathf.Max(0, currentHearts - hearts);

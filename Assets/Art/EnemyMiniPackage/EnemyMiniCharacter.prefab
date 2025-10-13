@@ -190,6 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1611423839162318931}
   - component: {fileID: 1832947823655824009}
+  - component: {fileID: 4615786313355706951}
   m_Layer: 0
   m_Name: EnemyMiniCharacter
   m_TagString: Untagged
@@ -235,6 +236,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4615786313355706951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732832238359194378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93f71e289a8fa644a491b0ba6a467a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationEventRelay
 --- !u!1 &5487924143098413378
 GameObject:
   m_ObjectHideFlags: 0

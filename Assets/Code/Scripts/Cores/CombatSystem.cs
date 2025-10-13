@@ -11,6 +11,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform spriteTransform;
+    [SerializeField] private PlayerSkills playerSkills;
     
     private int _currentAttackIndex = 0;
     private float _attackTimer = 0f;
@@ -56,6 +57,11 @@ public class CombatSystem : MonoBehaviour
     
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (playerSkills != null && (playerSkills.IsAiming || playerSkills.IsDeflecting))
+        {
+            return;
+        }
+        
         if (context.performed)
         {
             if (!_isAttacking)

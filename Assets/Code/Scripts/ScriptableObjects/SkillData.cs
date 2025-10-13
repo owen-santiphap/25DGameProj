@@ -16,10 +16,6 @@ public class SkillData : ScriptableObject
     [Header("Cooldown")]
     public float cooldownTime = 5f;
     
-    [Header("Resource Cost")]
-    public int manaCost = 0;
-    public int staminaCost = 0;
-    
     [Header("Combat")]
     public float damage;
     public float range = 5f;
@@ -36,9 +32,11 @@ public class SkillData : ScriptableObject
     public bool canMoveWhileCasting = false;
     public float movementSpeedMultiplier = 0f;
     
-    [Header("Special")]
-    public SkillType skillType = SkillType.Damage;
-    public float specialValue; // Healing amount, buff duration, etc.
+    [Header("Deflect Settings")]
+    [Tooltip("How long the deflect state remains active.")]
+    public float deflectDuration = 1.5f;
+    [Tooltip("Damage dealt back to the attacker on a successful deflect.")]
+    public int deflectDamage = 1;
 }
 
 public enum SkillType
@@ -48,5 +46,7 @@ public enum SkillType
     Buff,
     Debuff,
     Summon,
-    Teleport
+    Teleport,
+    Deflect,
+    AimedShot
 }

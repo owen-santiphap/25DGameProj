@@ -1,346 +1,252 @@
+using System;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class PlayerSkills : MonoBehaviour
 {
     [Header("Skill Setup")]
-    [SerializeField] private SkillData[] skills;
-    [SerializeField] private int maxSkillSlots = 4;
+    [SerializeField] private SkillData deflectSkill;
+    [SerializeField] private SkillData aimedShotSkill;
     
+    public SkillData DeflectSkill => deflectSkill;
+    
+    [Header("UI References")]
+    [SerializeField] private UISkillDisplay deflectSkillUI;
+    [SerializeField] private UISkillDisplay aimedShotSkillUI;
+    [SerializeField] private GameObject deflectIconPrefab;
+    private GameObject _deflectIconInstance;
+
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private Transform skillCastPoint;
-    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private PlayerController movement;
-    
-    [Header("Resources")]
-    [SerializeField] private int maxMana = 100;
-    [SerializeField] private int currentMana = 100;
-    [SerializeField] private float manaRegenRate = 5f; // Per second
-    
-    private float[] skillCooldowns;
-    private bool isCastingSkill = false;
-    private float castTimer = 0f;
-    private SkillData currentSkill;
-    
-    public bool IsCastingSkill => isCastingSkill;
-    public int CurrentMana => currentMana;
-    public int MaxMana => maxMana;
-    
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Camera mainCamera;
+
+    [Header("Aiming")]
+    [SerializeField] private GameObject aimIndicatorPrefab;
+    [SerializeField] private LayerMask groundLayer;
+    private GameObject _aimIndicatorInstance;
+
+    private float _deflectCooldownTimer;
+    private float _aimedShotCooldownTimer;
+    private HealthSystem _healthSystem;
+
+    // --- State Management ---
+    private bool _isDeflecting = false;
+    private bool _isAiming = false;
+    private float _deflectTimer = 0f;
+    private Vector2 _aimInput;
+
+    public bool IsDeflecting => _isDeflecting;
+    public bool IsAiming => _isAiming;
+
     private void Awake()
     {
-        skillCooldowns = new float[maxSkillSlots];
+        _healthSystem = GetComponent<HealthSystem>();
+        if (playerInput == null) playerInput = GetComponent<PlayerInput>();
+        if (mainCamera == null) mainCamera = Camera.main;
     }
-    
+
+    private void Start()
+    {
+        // Initialize UI icons at the start of the game
+        if (deflectSkillUI != null && deflectSkill.icon != null)
+        {
+            deflectSkillUI.SetIcon(deflectSkill.icon);
+        }
+        if (aimedShotSkillUI != null && aimedShotSkill.icon != null)
+        {
+            aimedShotSkillUI.SetIcon(aimedShotSkill.icon);
+        }
+    }
+
     private void Update()
     {
         UpdateCooldowns();
-        RegenerateMana();
-        
-        if (isCastingSkill)
+
+        // Handle the duration of the Deflect skill
+        if (_isDeflecting)
         {
-            castTimer += Time.deltaTime;
-            
-            if (castTimer >= currentSkill.animationDuration)
+            _deflectTimer += Time.deltaTime;
+            // --- CHANGE IS HERE ---
+            // Use the new deflectDuration field instead of animationDuration
+            if (_deflectTimer >= deflectSkill.deflectDuration)
             {
-                EndSkillCast();
+                EndDeflect();
             }
         }
-    }
-    
-    // Input System callbacks - wire these up in PlayerInput component
-    public void OnSkill1(InputAction.CallbackContext context)
-    {
-        if (context.performed) TryCastSkill(0);
-    }
-    
-    public void OnSkill2(InputAction.CallbackContext context)
-    {
-        if (context.performed) TryCastSkill(1);
-    }
-    
-    public void OnSkill3(InputAction.CallbackContext context)
-    {
-        if (context.performed) TryCastSkill(2);
-    }
-    
-    public void OnSkill4(InputAction.CallbackContext context)
-    {
-        if (context.performed) TryCastSkill(3);
-    }
-    
-    private void TryCastSkill(int skillIndex)
-    {
-        // Validate skill index
-        if (skillIndex >= skills.Length || skills[skillIndex] == null)
-            return;
-        
-        // Check if already casting
-        if (isCastingSkill)
-            return;
-        
-        SkillData skill = skills[skillIndex];
-        
-        // Check cooldown
-        if (skillCooldowns[skillIndex] > 0)
+
+        // Handle aiming direction
+        if (_isAiming)
         {
-            Debug.Log($"{skill.skillName} is on cooldown!");
-            return;
-        }
-        
-        // Check resource cost
-        if (currentMana < skill.manaCost)
-        {
-            Debug.Log("Not enough mana!");
-            return;
-        }
-        
-        // Cast the skill
-        CastSkill(skill, skillIndex);
-    }
-    
-    private void CastSkill(SkillData skill, int skillIndex)
-    {
-        // Consume resources
-        currentMana -= skill.manaCost;
-        
-        // Set cooldown
-        skillCooldowns[skillIndex] = skill.cooldownTime;
-        
-        // Set casting state
-        isCastingSkill = true;
-        currentSkill = skill;
-        castTimer = 0f;
-        
-        // Play animation
-        if (animator != null)
-        {
-            animator.Play(skill.animationName, 0, 0f);
-        }
-        
-        // Execute skill effect (can be delayed via animation event)
-        ExecuteSkillEffect(skill);
-    }
-    
-    // Call this from Animation Event for precise timing
-    public void ExecuteCurrentSkillEffect()
-    {
-        if (currentSkill != null)
-        {
-            ExecuteSkillEffect(currentSkill);
+            HandleAiming();
         }
     }
     
-    private void ExecuteSkillEffect(SkillData skill)
+
+    // Bound to Q / L1 for a single press
+    public void OnDeflect(InputAction.CallbackContext context)
     {
-        switch (skill.skillType)
+        if (context.performed)
         {
-            case SkillType.Damage:
-                ExecuteDamageSkill(skill);
-                break;
-            case SkillType.Heal:
-                ExecuteHealSkill(skill);
-                break;
-            case SkillType.Buff:
-                ExecuteBuffSkill(skill);
-                break;
-            case SkillType.Teleport:
-                ExecuteTeleportSkill(skill);
-                break;
-        }
-        
-        // Spawn effect
-        if (skill.effectPrefab != null)
-        {
-            Vector3 effectPosition = skillCastPoint.position + transform.TransformDirection(skill.offset);
-            
-            if (skill.projectile)
+            if (_isDeflecting || _isAiming) return; // Already busy
+            if (_deflectCooldownTimer > 0)
             {
-                SpawnProjectile(skill, effectPosition);
+                Debug.Log($"Cannot Deflect. Cooldown remaining: {_deflectCooldownTimer:F1}s");
+                return;
             }
-            else
-            {
-                Instantiate(skill.effectPrefab, effectPosition, Quaternion.identity);
-            }
+            StartDeflect();
         }
     }
-    
-    private void ExecuteDamageSkill(SkillData skill)
+
+    // Bound to E / R1 for hold and release
+    public void OnAimedShot(InputAction.CallbackContext context)
     {
-        Vector3 skillPosition = skillCastPoint.position + transform.TransformDirection(skill.offset);
-        
-        if (skill.isAOE)
+        // When the button is first pressed, start aiming
+        if (context.started && !_isDeflecting && !_isAiming && _aimedShotCooldownTimer <= 0)
         {
-            // AOE damage
-            Collider[] hitEnemies = Physics.OverlapSphere(skillPosition, skill.aoeRadius, enemyLayer);
-            
-            foreach (Collider enemy in hitEnemies)
+            StartAiming();
+        }
+        
+        // When the button is released, fire the projectile
+        if (context.canceled && _isAiming)
+        {
+            FireAimedProjectile(); // Fire the shot instead of just ending the aim
+        }
+    }
+
+    // Bound to Mouse Position / Right Stick
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        _aimInput = context.ReadValue<Vector2>();
+    }   
+
+    // --- SKILL IMPLEMENTATION ---
+
+    private void StartDeflect()
+    {
+        _isDeflecting = true;
+        _deflectTimer = 0f;
+        _deflectCooldownTimer = deflectSkill.cooldownTime;
+        animator.SetBool("IsRunning", false);
+
+        movement.enabled = false; // This correctly stops the player from moving
+        _healthSystem.IsDeflecting = true;
+        animator.Play(deflectSkill.animationName, 0, 0f);
+
+        // --- Spawn the icon above the player ---
+        if (deflectIconPrefab != null)
+        {
+            // Position it 2 units above the player's pivot point
+            var iconPosition = transform.position + Vector3.up * 2f;
+            _deflectIconInstance = Instantiate(deflectIconPrefab, iconPosition, Quaternion.identity, transform);
+        }
+    }
+
+    private void EndDeflect()
+    {
+        _isDeflecting = false;
+        _healthSystem.IsDeflecting = false;
+        movement.enabled = true; // This correctly allows the player to move again
+        animator.Play("Idle");
+
+        // --- Destroy the icon ---
+        if (_deflectIconInstance != null)
+        {
+            Destroy(_deflectIconInstance);
+        }
+    }
+
+    private void StartAiming()
+    {
+        _isAiming = true;
+        _aimedShotCooldownTimer = aimedShotSkill.cooldownTime;
+        movement.enabled = false;
+        animator.SetBool("IsRunning", false);
+        animator.Play("Idle");
+        if (aimIndicatorPrefab != null)
+        {
+            _aimIndicatorInstance = Instantiate(aimIndicatorPrefab, transform.position, Quaternion.identity, transform);
+        }
+    }
+
+    private void EndAiming()
+    {
+        _isAiming = false;
+        movement.enabled = true;
+        if (_aimIndicatorInstance != null)
+        {
+            Destroy(_aimIndicatorInstance);
+        }
+        animator.Play("Idle");
+    }
+
+    private void FireAimedProjectile()
+    {
+        animator.Play(aimedShotSkill.animationName, 0, 0f);
+
+        if (aimedShotSkill.effectPrefab != null)
+        {
+            var spawnPosition = skillCastPoint.position;
+            var spawnRotation = _aimIndicatorInstance != null ? _aimIndicatorInstance.transform.rotation : transform.rotation;
+            var projectile = Instantiate(aimedShotSkill.effectPrefab, spawnPosition, spawnRotation);
+
+            var projScript = projectile.GetComponent<SkillProjectile>();
+            if (projScript != null)
             {
-                DamageEnemy(enemy, skill);
+                projScript.Initialize();
             }
         }
-        else
+
+        EndAiming(); // This will clean up the indicator and re-enable movement
+    }
+
+    private void HandleAiming()
+    {
+        if (_aimIndicatorInstance == null) return;
+        var direction = Vector3.zero;
+
+        if (playerInput.currentControlScheme == "Gamepad")
         {
-            // Single target or line damage
-            Collider[] hitEnemies = Physics.OverlapSphere(skillPosition, skill.range, enemyLayer);
-            
-            if (hitEnemies.Length > 0)
+            direction = new Vector3(_aimInput.x, 0, _aimInput.y).normalized;
+        }
+        else // Keyboard & Mouse
+        {
+            var ray = mainCamera.ScreenPointToRay(_aimInput);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, groundLayer))
             {
-                DamageEnemy(hitEnemies[0], skill);
+                var targetPoint = hitInfo.point;
+                direction = (targetPoint - transform.position).normalized;
+                direction.y = 0;
             }
         }
-    }
-    
-    private void DamageEnemy(Collider enemy, SkillData skill)
-    {
-        HealthSystem enemyHealth = enemy.GetComponent<HealthSystem>();
-        if (enemyHealth != null)
+
+        if (direction.sqrMagnitude > 0.1f)
         {
-            enemyHealth.TakeDamage(Mathf.RoundToInt(skill.damage));
-        }
-        
-        IHittable hittable = enemy.GetComponent<IHittable>();
-        if (hittable != null)
-        {
-            Vector3 hitDirection = (enemy.transform.position - transform.position).normalized;
-            hittable.OnHit(skill.damage, hitDirection);
+            _aimIndicatorInstance.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
     }
-    
-    private void ExecuteHealSkill(SkillData skill)
-    {
-        HealthSystem playerHealth = GetComponent<HealthSystem>();
-        if (playerHealth != null)
-        {
-            playerHealth.Heal(Mathf.RoundToInt(skill.specialValue));
-        }
-    }
-    
-    private void ExecuteBuffSkill(SkillData skill)
-    {
-        // Implement buff system (speed boost, damage boost, etc.)
-        Debug.Log($"Applied buff: {skill.skillName} for {skill.specialValue} seconds");
-    }
-    
-    private void ExecuteTeleportSkill(SkillData skill)
-    {
-        // Teleport in facing direction
-        Vector3 teleportDirection = transform.forward * skill.range;
-        CharacterController controller = GetComponent<CharacterController>();
-        
-        if (controller != null)
-        {
-            controller.Move(teleportDirection);
-        }
-        else
-        {
-            transform.position += teleportDirection;
-        }
-    }
-    
-    private void SpawnProjectile(SkillData skill, Vector3 spawnPosition)
-    {
-        GameObject projectile = Instantiate(skill.effectPrefab, spawnPosition, Quaternion.identity);
-        
-        // Add velocity
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Vector3 direction = transform.forward;
-            rb.linearVelocity = direction * skill.projectileSpeed;
-        }
-        
-        // Add projectile script if needed
-        SkillProjectile projScript = projectile.GetComponent<SkillProjectile>();
-        if (projScript != null)
-        {
-            projScript.Initialize(skill.damage, enemyLayer);
-        }
-    }
-    
-    private void EndSkillCast()
-    {
-        isCastingSkill = false;
-        currentSkill = null;
-        
-        // Return to idle if not moving
-        if (movement != null && animator != null)
-        {
-            // Movement script will handle animation
-        }
-    }
-    
+
     private void UpdateCooldowns()
     {
-        for (int i = 0; i < skillCooldowns.Length; i++)
+        if (_deflectCooldownTimer > 0)
         {
-            if (skillCooldowns[i] > 0)
-            {
-                skillCooldowns[i] -= Time.deltaTime;
-            }
+            _deflectCooldownTimer -= Time.deltaTime;
         }
-    }
-    
-    private void RegenerateMana()
-    {
-        if (currentMana < maxMana)
+        if (_aimedShotCooldownTimer > 0)
         {
-            currentMana = Mathf.Min(maxMana, currentMana + Mathf.RoundToInt(manaRegenRate * Time.deltaTime));
+            _aimedShotCooldownTimer -= Time.deltaTime;
         }
-    }
-    
-    public float GetSkillCooldown(int skillIndex)
-    {
-        if (skillIndex >= 0 && skillIndex < skillCooldowns.Length)
-        {
-            return skillCooldowns[skillIndex];
-        }
-        return 0f;
-    }
-    
-    public bool IsSkillReady(int skillIndex)
-    {
-        return skillCooldowns[skillIndex] <= 0;
-    }
-}
 
-public class SkillProjectile : MonoBehaviour
-{
-    private float damage;
-    private LayerMask enemyLayer;
-    private bool hasHit = false;
-    
-    [SerializeField] private float lifetime = 5f;
-    
-    public void Initialize(float dmg, LayerMask layer)
-    {
-        damage = dmg;
-        enemyLayer = layer;
-        Destroy(gameObject, lifetime);
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (hasHit) return;
-        
-        // Check if hit enemy
-        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        // Update the UI displays
+        if (deflectSkillUI != null)
         {
-            HealthSystem enemyHealth = other.GetComponent<HealthSystem>();
-            if (enemyHealth != null)
-            {
-                enemyHealth.TakeDamage(Mathf.RoundToInt(damage));
-            }
-            
-            IHittable hittable = other.GetComponent<IHittable>();
-            if (hittable != null)
-            {
-                Vector3 hitDirection = transform.forward;
-                hittable.OnHit(damage, hitDirection);
-            }
-            
-            hasHit = true;
-            Destroy(gameObject);
+            deflectSkillUI.UpdateCooldown(_deflectCooldownTimer, deflectSkill.cooldownTime);
+        }
+        if (aimedShotSkillUI != null)
+        {
+            aimedShotSkillUI.UpdateCooldown(_aimedShotCooldownTimer, aimedShotSkill.cooldownTime);
         }
     }
 }
