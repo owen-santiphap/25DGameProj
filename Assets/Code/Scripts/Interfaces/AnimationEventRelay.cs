@@ -1,7 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimationEventRelay : MonoBehaviour
 {
+    [SerializeField] private GameObject warningSprite;
+    
     private CombatSystem _combatSystem;
     private PlayerController _playerController;
     private EnemyBase _enemyBase;
@@ -37,6 +40,14 @@ public class AnimationEventRelay : MonoBehaviour
         }
     }
 
+    public void EnemyWarning()
+    {
+        if (warningSprite != null)
+        {
+            warningSprite.SetActive(true);
+        }
+    }
+
     public void SpawnAttackEffect()
     {
         if (_combatSystem != null)
@@ -52,7 +63,10 @@ public class AnimationEventRelay : MonoBehaviour
 
     public void OnAnimationComplete()
     {
-        
+        if (warningSprite != null)
+        {
+            warningSprite.SetActive(false);
+        }
     }
 
     public void DealDamageToPlayer()

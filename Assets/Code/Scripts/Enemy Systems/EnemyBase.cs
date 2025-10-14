@@ -159,7 +159,7 @@ public class EnemyBase : MonoBehaviour, IHittable
         }
         
         // Deal damage (can be called from animation event instead)
-        DealDamageToPlayer();
+        //DealDamageToPlayer();
     }
     
     public virtual void DealDamageToPlayer()
@@ -171,10 +171,10 @@ public class EnemyBase : MonoBehaviour, IHittable
         {
             var playerHealth = PlayerTransform.GetComponent<HealthSystem>();
             var playerSkills = PlayerTransform.GetComponent<PlayerSkills>();
-            Debug.Log("HIT PLAYER1");
+            //Debug.Log("HIT PLAYER1");
             if (playerHealth != null)
             {
-                Debug.Log("HIT PLAYER2");
+                //Debug.Log("HIT PLAYER2");
                 if (playerSkills != null && playerSkills.IsDeflecting)
                 {
                     Debug.Log("Player Deflected! Enemy takes damage.");

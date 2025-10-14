@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5771801703078210052}
   - component: {fileID: 6264187520807415728}
   - component: {fileID: -2579978894897288398}
+  - component: {fileID: 5173167495950361149}
   m_Layer: 0
   m_Name: Skill1HitParticle
   m_TagString: Untagged
@@ -4916,3 +4917,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::billboard
+--- !u!114 &5173167495950361149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448202518022113049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726c8a4abcca2ba448b39994b07942cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelfDestruct
+  lifetime: 0.05
