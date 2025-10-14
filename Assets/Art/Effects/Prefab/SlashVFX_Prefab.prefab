@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8629972382842445727}
   - component: {fileID: 7784251048425967636}
   - component: {fileID: -2107911737319372898}
+  - component: {fileID: -1718245488480046484}
   m_Layer: 7
   m_Name: SlashVFX_Prefab
   m_TagString: Untagged
@@ -140,3 +141,15 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &-1718245488480046484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8634947947806198741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::billboard

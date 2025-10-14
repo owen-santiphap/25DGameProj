@@ -2459,6 +2459,8 @@ GameObject:
   - component: {fileID: 2124504965}
   - component: {fileID: 2124504967}
   - component: {fileID: 2124504968}
+  - component: {fileID: 2124504970}
+  - component: {fileID: 2124504969}
   m_Layer: 7
   m_Name: EnemyHeavyOBJ
   m_TagString: Enemy
@@ -2567,6 +2569,38 @@ CapsuleCollider:
   m_Height: 24.4
   m_Direction: 1
   m_Center: {x: 0, y: 10.4, z: 0}
+--- !u!114 &2124504969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124504963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d5a9916acd1b645b049f8e8a8d145e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusEffect
+  stacksToExplode: 3
+  explosionVFX: {fileID: 8117529121958471449, guid: 334f4c4331c7fd54fa5ecf0a6659214a, type: 3}
+  explosionRadius: 5
+  explosionDamage: 10
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  stackUIPrefab: {fileID: 0}
+--- !u!114 &2124504970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124504963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::billboard
 --- !u!4 &1154631749495622684
 Transform:
   m_ObjectHideFlags: 0
@@ -2600,6 +2634,7 @@ GameObject:
   - component: {fileID: 8864300610308758871}
   - component: {fileID: 8864300610308758872}
   - component: {fileID: 8864300610308758873}
+  - component: {fileID: 8864300610308758874}
   m_Layer: 6
   m_Name: PlayerCharacterOBJ
   m_TagString: Player
@@ -2888,6 +2923,18 @@ CapsuleCollider:
   m_Height: 13
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8864300610308758874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864300610308758865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Billboard
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

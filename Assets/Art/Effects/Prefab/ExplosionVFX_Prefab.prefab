@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6330475031721907571}
   - component: {fileID: 8475629428287460840}
   - component: {fileID: -2857767495747502197}
+  - component: {fileID: 6911063502686063974}
   m_Layer: 7
   m_Name: ExplosionVFX_Prefab
   m_TagString: Untagged
@@ -28,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8117529121958471449}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 5, y: 9.1, z: 28.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8279161937782480192
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -140,3 +141,15 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &6911063502686063974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8117529121958471449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::billboard
