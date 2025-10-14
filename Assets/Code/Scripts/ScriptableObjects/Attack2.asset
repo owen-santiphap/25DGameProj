@@ -21,4 +21,4 @@ MonoBehaviour:
   attackOffset: {x: 0, y: 0, z: 0}
   canMove: 0
   movementSpeedMultiplier: 0
-  attackVFX: {fileID: 8634947947806198741, guid: fa21242e7c208cf4da5cd29b48eafb2c, type: 3}
+  attackVFX: {fileID: 8634947947806198741, guid: c91615b127932b341acf9b051f738519, type: 3}
