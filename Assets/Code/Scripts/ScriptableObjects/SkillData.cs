@@ -19,14 +19,9 @@ public class SkillData : ScriptableObject
     [Header("Combat")]
     public float damage;
     public float range = 5f;
-    public Vector3 offset = Vector3.forward;
-    public bool isAOE = false;
-    public float aoeRadius = 3f;
     
     [Header("Effects")]
     public GameObject effectPrefab;
-    public bool projectile = false;
-    public float projectileSpeed = 10f;
     
     [Header("Movement")]
     public bool canMoveWhileCasting = false;

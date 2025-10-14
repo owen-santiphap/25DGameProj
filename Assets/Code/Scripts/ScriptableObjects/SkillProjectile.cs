@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SkillProjectile : MonoBehaviour
@@ -5,6 +6,7 @@ public class SkillProjectile : MonoBehaviour
     [SerializeField] private float lifetime = 5f;
     [SerializeField] private float speed = 20f;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private GameObject projectileVfxPrefab;
 
     private bool _hasHit = false;
 
@@ -30,6 +32,7 @@ public class SkillProjectile : MonoBehaviour
             if (status != null)
             {
                 status.AddStack();
+                Instantiate(projectileVfxPrefab, other.transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
         }

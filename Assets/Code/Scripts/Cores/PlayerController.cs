@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // Set running animation based on movement
-        var isMoving = _moveInput.magnitude > 0.1f;
+        var isMoving = _moveInput.magnitude > 0.01f;
         animator.SetBool("IsRunning", isMoving);
     }
     

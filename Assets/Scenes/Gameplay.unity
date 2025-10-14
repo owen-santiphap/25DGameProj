@@ -1117,7 +1117,7 @@ MonoBehaviour:
   knockbackDuration: 0.3
   animator: {fileID: 1645204742}
   spriteTransform: {fileID: 1162343749}
-  deathVFX: {fileID: 8117529121958471449, guid: 334f4c4331c7fd54fa5ecf0a6659214a, type: 3}
+  deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
 --- !u!114 &1162343748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,7 +1364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8714540603877885146, guid: b33696ae50e9099429fa85e4302e7478, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1771,6 +1771,7 @@ GameObject:
   - component: {fileID: 1406423843}
   - component: {fileID: 1406423842}
   - component: {fileID: 1406423841}
+  - component: {fileID: 1406423845}
   m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
@@ -1871,6 +1872,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1406423845
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406423840}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
 --- !u!1001 &1503811055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2000,16 +2013,16 @@ RectTransform:
   m_GameObject: {fileID: 1544614796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 292696407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1870, y: -1030}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -50, y: 50}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1544614798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2030,9 +2043,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ca06ce13f609caa47805b2c0ff13c3b3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2606,7 +2619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07cc1b433e17294fb7d66082e9a3697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 15
+  moveSpeed: 30
   rotationSpeed: 10
   gravity: -9.81
   groundCheckDistance: 0.2

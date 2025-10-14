@@ -171,9 +171,10 @@ public class EnemyBase : MonoBehaviour, IHittable
         {
             var playerHealth = PlayerTransform.GetComponent<HealthSystem>();
             var playerSkills = PlayerTransform.GetComponent<PlayerSkills>();
-
+            Debug.Log("HIT PLAYER1");
             if (playerHealth != null)
             {
+                Debug.Log("HIT PLAYER2");
                 if (playerSkills != null && playerSkills.IsDeflecting)
                 {
                     Debug.Log("Player Deflected! Enemy takes damage.");
@@ -250,7 +251,8 @@ public class EnemyBase : MonoBehaviour, IHittable
         CurrentState = EnemyState.Dead;
         if (deathVFX != null)
         {
-            Instantiate(deathVFX, transform.position, Quaternion.identity);
+            var rotation = Quaternion.Euler(45, 0, 0);
+            Instantiate(deathVFX, transform.position, rotation);
         }
         
         if (animator != null)
