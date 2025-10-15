@@ -86,7 +86,14 @@ public class GameManager : MonoBehaviour
     // Call this from a UI button to restart
     public void RestartGame()
     {
+        if (!_isGameOver) return;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 }

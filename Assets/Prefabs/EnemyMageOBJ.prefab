@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5481803506078992245}
   - component: {fileID: 8008238100648171544}
   - component: {fileID: 6313648301135040452}
-  - component: {fileID: 850829877198091985}
   - component: {fileID: 2606165466296366441}
   - component: {fileID: 127569170171478379}
   - component: {fileID: 8166625489441505607}
@@ -107,26 +106,6 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_SortAtRoot: 1
---- !u!114 &850829877198091985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235590115826622191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d5a9916acd1b645b049f8e8a8d145e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusEffect
-  stacksToExplode: 3
-  explosionVFX: {fileID: 7739029962760493951, guid: 0cf1bbb7e5f61ed4783a7bb0095b670b, type: 3}
-  explosionRadius: 5
-  explosionDamage: 10
-  damageLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  stackUIPrefab: {fileID: 0}
 --- !u!114 &2606165466296366441
 MonoBehaviour:
   m_ObjectHideFlags: 0

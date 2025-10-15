@@ -3984,7 +3984,6 @@ GameObject:
   - component: {fileID: 8864300610308758870}
   - component: {fileID: 8864300610308758871}
   - component: {fileID: 8864300610308758872}
-  - component: {fileID: 8864300610308758873}
   - component: {fileID: 8864300610308758874}
   m_Layer: 6
   m_Name: PlayerCharacterOBJ
@@ -4214,6 +4213,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cbdb6f53-b05c-46e8-b1db-64b0e14ab135
     m_ActionName: 'Player/Dash[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1272983409}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9d7b08a3-026d-4dd5-9953-a64d1cf718fd
+    m_ActionName: 'Player/Restart[/Keyboard/f5]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1272983409}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3369dcf7-5cd3-4bdd-bb37-8cf419b88247
+    m_ActionName: 'Player/ReturnMenu[/Keyboard/f6]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4261,29 +4292,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
---- !u!136 &8864300610308758873
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8864300610308758865}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 2
-  m_Height: 13
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8864300610308758874
 MonoBehaviour:
   m_ObjectHideFlags: 0
