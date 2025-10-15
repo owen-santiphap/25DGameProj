@@ -139,7 +139,7 @@ public class PlayerSkills : MonoBehaviour
     private void StartDash()
     {
         _dashCooldownTimer = dashSkill.cooldownTime;
-        animator.Play(dashSkill.animationName, 0, 0f);
+        animator.SetTrigger("Dash"); 
 
         if (dashSkill.effectPrefab != null)
         {

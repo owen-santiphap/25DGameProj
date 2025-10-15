@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private bool _isDashing;
     
+    public bool IsDashing => _isDashing;
+    
     private void Reset()
     {
         controller = GetComponent<CharacterController>();
@@ -98,8 +100,9 @@ public class PlayerController : MonoBehaviour
             controller.Move(dashDirection * (dashSpeed * Time.deltaTime));
             yield return null; // Wait for the next frame
         }
-
+       
         _isDashing = false;
+        UpdateAnimations();
     }
     
     private void HandleMovement()
@@ -143,10 +146,10 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return;
         
-        // Don't override attack animations!!!
-        if (combat != null && combat.IsAttacking)
+        //Don't override!
+        if (_isDashing || (combat != null && combat.IsAttacking))
         {
-            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsRunning", false); // Ensure running is off
             return;
         }
         
