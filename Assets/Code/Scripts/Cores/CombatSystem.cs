@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform spriteTransform;
     [SerializeField] private PlayerSkills playerSkills;
+    [SerializeField] private CharacterController characterController;
     
     private int _currentAttackIndex = 0;
     private float _attackTimer = 0f;
@@ -20,7 +22,12 @@ public class CombatSystem : MonoBehaviour
     private bool _inputBuffered = false;
     
     public bool IsAttacking => _isAttacking;
-    
+
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+    }
+
     private void Update()
     {
         if (_isAttacking)
@@ -109,8 +116,15 @@ public class CombatSystem : MonoBehaviour
     
     private void ExecuteAttack(AttackData attack)
     {
-        // Play animation
         animator.Play(attack.animationName, 0, 0f);
+        
+        if (attack.forwardMovement > 0 && characterController != null)
+        {
+            // Determine the forward direction based on which way the sprite is flipped
+            var moveDirection = new Vector3(spriteTransform.localScale.x, 0, 0);
+            
+            characterController.Move(moveDirection * attack.forwardMovement * Time.deltaTime * 10f); // Multiplier for feel
+        }
         
         // Deal damage - can call this from animation event for better timing
         DealDamage(attack);

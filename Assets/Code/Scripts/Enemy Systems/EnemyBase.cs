@@ -290,7 +290,7 @@ public class EnemyBase : MonoBehaviour, IHittable
         
         if (animator != null)
         {
-            animator.SetTrigger("Death");
+            //animator.SetTrigger("Death");
         }
         
         // Disable components
