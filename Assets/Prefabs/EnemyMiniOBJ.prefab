@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1895587068384008420}
   - component: {fileID: 1055368028716518284}
   - component: {fileID: 218153990044740633}
-  - component: {fileID: 5741784435048965975}
   - component: {fileID: 37886894115438144}
   - component: {fileID: 5307096525069685015}
+  - component: {fileID: 5234306437849131524}
   m_Layer: 7
   m_Name: EnemyMiniOBJ
   m_TagString: Enemy
@@ -83,6 +83,11 @@ MonoBehaviour:
   attackDamage: 1
   moveSpeed: 10
   rotationSpeed: 2
+  gravity: -9.81
+  groundCheckDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   knockbackForce: 100
   knockbackDuration: 0.3
   animator: {fileID: 8866900423723773862}
@@ -100,29 +105,6 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_SortAtRoot: 0
---- !u!136 &5741784435048965975
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7993822893728822364}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.59
-  m_Height: 12.53
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &37886894115438144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +137,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::billboard
+--- !u!143 &5234306437849131524
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993822893728822364}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 11.08
+  m_Radius: 5.38
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!1001 &7089367994698319151
 PrefabInstance:
   m_ObjectHideFlags: 0

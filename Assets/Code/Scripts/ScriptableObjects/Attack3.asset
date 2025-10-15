@@ -17,7 +17,7 @@ MonoBehaviour:
   comboWindowStart: 0
   comboWindowEnd: 0
   damage: 15
-  attackRange: 2
+  attackRange: 7
   attackOffset: {x: 0, y: 0, z: 0}
   canMove: 0
   movementSpeedMultiplier: 0

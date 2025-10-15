@@ -14,6 +14,13 @@ public class EnemyBase : MonoBehaviour, IHittable
     [SerializeField] protected float moveSpeed = 3f;
     [SerializeField] protected float rotationSpeed = 5f;
     
+    [Header("Gravity")]
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+    private Vector3 _velocity;
+    private bool _isGrounded;
+    
     [Header("Knockback")]
     [SerializeField] protected float knockbackForce = 5f;
     [SerializeField] protected float knockbackDuration = 0.3f;
@@ -65,6 +72,9 @@ public class EnemyBase : MonoBehaviour, IHittable
     {
         if (HealthSystem.IsDead) return;
         
+        CheckGround();
+        ApplyGravity();
+        
         HandleKnockback();
         
         if (!_isKnockedBack)
@@ -74,6 +84,23 @@ public class EnemyBase : MonoBehaviour, IHittable
         }
         
         _attackTimer -= Time.deltaTime;
+    }
+    
+    private void CheckGround()
+    {
+        var spherePosition = new Vector3(transform.position.x, _controller.bounds.min.y, transform.position.z);
+        _isGrounded = Physics.CheckSphere(spherePosition, 0.1f, groundLayer, QueryTriggerInteraction.Ignore);
+    }
+    
+    private void ApplyGravity()
+    {
+        if (_isGrounded && _velocity.y < 0)
+        {
+            _velocity.y = -2f; // A small force to keep them stuck to the ground
+        }
+
+        _velocity.y += gravity * Time.deltaTime;
+        _controller.Move(_velocity * Time.deltaTime);
     }
     
     protected virtual void UpdateState()
