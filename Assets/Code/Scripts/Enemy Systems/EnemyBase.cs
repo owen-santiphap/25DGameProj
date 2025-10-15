@@ -29,7 +29,9 @@ public class EnemyBase : MonoBehaviour, IHittable
     [SerializeField] protected Animator animator;
     [SerializeField] protected Transform spriteTransform;
     [SerializeField] protected GameObject deathVFX;
+    [SerializeField] protected GameObject warningIndicator;
     
+    protected bool IsWarning = false;
     protected HealthSystem HealthSystem;
     protected Transform PlayerTransform;
     private CharacterController _controller;
@@ -134,7 +136,7 @@ public class EnemyBase : MonoBehaviour, IHittable
                 break;
                 
             case EnemyState.Attacking:
-                if (distanceToPlayer > attackRange)
+                if (distanceToPlayer > attackRange && _attackTimer <= 0.5)
                 {
                     CurrentState = EnemyState.Chasing;
                 }
@@ -189,6 +191,8 @@ public class EnemyBase : MonoBehaviour, IHittable
             moveSpeed = 0;
         }
         moveSpeed = tempSpeed;
+        
+        CancelWarning();
         
         // Deal damage (can be called from animation event instead)
         //DealDamageToPlayer();
@@ -245,6 +249,7 @@ public class EnemyBase : MonoBehaviour, IHittable
         _knockbackVelocity = hitDirection * knockbackForce;
         _knockbackVelocity.y = 0;
         animator.Play("Idle");
+        CancelWarning();
     }
     
     //Event
@@ -276,6 +281,26 @@ public class EnemyBase : MonoBehaviour, IHittable
         if (animator != null)
         {
             //animator.SetTrigger("Hurt");
+        }
+    }
+    
+    public void EnemyWarning()
+    {
+        if (HealthSystem.IsDead) return;
+
+        IsWarning = true;
+        if (warningIndicator != null)
+        {
+            warningIndicator.SetActive(true);
+        }
+    }
+    
+    private void CancelWarning()
+    {
+        IsWarning = false;
+        if (warningIndicator != null)
+        {
+            warningIndicator.SetActive(false);
         }
     }
     

@@ -26,7 +26,8 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Camera mainCamera;
 
-    [Header("Aiming")]
+    [Header("Aiming")] 
+    [SerializeField] private Transform aimOrigin;
     [SerializeField] private GameObject aimIndicatorPrefab;
     [SerializeField] private LayerMask groundLayer;
     private GameObject _aimIndicatorInstance;
@@ -202,7 +203,7 @@ public class PlayerSkills : MonoBehaviour
         animator.Play("Idle");
         if (aimIndicatorPrefab != null)
         {
-            _aimIndicatorInstance = Instantiate(aimIndicatorPrefab, transform.position, Quaternion.identity, transform);
+            _aimIndicatorInstance = Instantiate(aimIndicatorPrefab, aimOrigin.position, Quaternion.identity, transform);
         }
     }
 

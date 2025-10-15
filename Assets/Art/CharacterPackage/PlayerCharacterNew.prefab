@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395619418831845073}
   - component: {fileID: 1228931996661712140}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,6 +90,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2055950399687731914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6684154146145847671}
+  m_Layer: 6
+  m_Name: ATKPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6684154146145847671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055950399687731914}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.47, y: 0.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2218651638765772856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2263875129236492656
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2218651638765772856}
   - component: {fileID: 5794202899038363578}
-  m_Layer: 0
+  - component: {fileID: 7150535583690063043}
+  m_Layer: 6
   m_Name: PlayerCharacterNew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +154,8 @@ Transform:
   m_Children:
   - {fileID: 8652029140937272222}
   - {fileID: 2919211370105427813}
+  - {fileID: 6684154146145847671}
+  - {fileID: 8827195500475392092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5794202899038363578
@@ -146,6 +180,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7150535583690063043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263875129236492656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93f71e289a8fa644a491b0ba6a467a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationEventRelay
+  warningSprite: {fileID: 0}
 --- !u!1 &2953558419507438347
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 228763806669259892}
   - component: {fileID: 1760311575595079856}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArmFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2919211370105427813}
   - component: {fileID: 651859605558578374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlashVFX1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8652029140937272222}
   - component: {fileID: 7246616680940290122}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 977381558679865298}
   - component: {fileID: 1589512597348630380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7704761663942167060}
   - component: {fileID: 734116659547852618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cloak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 225613618383801711}
   - component: {fileID: 7572522321832363734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -702,7 +749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5386347333175959774}
   - component: {fileID: 6051493126925265750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArmBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2346135547555929885}
   - component: {fileID: 6060475242733563567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LegBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,3 +920,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &9020878646945980355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8827195500475392092}
+  m_Layer: 6
+  m_Name: AimOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8827195500475392092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9020878646945980355}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -6.064, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2218651638765772856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

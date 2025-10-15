@@ -87,12 +87,13 @@ MonoBehaviour:
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   knockbackForce: 100
   knockbackDuration: 0.3
   animator: {fileID: 8866900423723773862}
   spriteTransform: {fileID: 5925891312618165242}
   deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
+  warningIndicator: {fileID: 0}
 --- !u!210 &218153990044740633
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -104,7 +105,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_SortAtRoot: 0
+  m_SortAtRoot: 1
 --- !u!114 &37886894115438144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d5a9916acd1b645b049f8e8a8d145e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusEffect
-  stacksToExplode: 2
-  explosionVFX: {fileID: 8117529121958471449, guid: 334f4c4331c7fd54fa5ecf0a6659214a, type: 3}
+  stacksToExplode: 3
+  explosionVFX: {fileID: 7739029962760493951, guid: 0cf1bbb7e5f61ed4783a7bb0095b670b, type: 3}
   explosionRadius: 5
   explosionDamage: 10
   damageLayer:

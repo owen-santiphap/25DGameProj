@@ -39,12 +39,12 @@ public class AnimationEventRelay : MonoBehaviour
             _combatSystem.DealDamage();
         }
     }
-
+    
     public void EnemyWarning()
     {
-        if (warningSprite != null)
+        if (_enemyBase != null)
         {
-            warningSprite.SetActive(true);
+            _enemyBase.EnemyWarning();
         }
     }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3936157513003867853}
   - component: {fileID: 6946745726471838152}
   - component: {fileID: -6472114989073094873}
+  - component: {fileID: 6864413233275452244}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -173,6 +174,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::billboard
+--- !u!210 &6864413233275452244
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725944388329077111}
+  m_Enabled: 1
+  m_SortingLayerID: -1093649483
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_SortAtRoot: 1
 --- !u!1001 &662239679685739473
 PrefabInstance:
   m_ObjectHideFlags: 0
