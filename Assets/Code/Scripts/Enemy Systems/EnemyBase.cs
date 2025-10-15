@@ -157,6 +157,11 @@ public class EnemyBase : MonoBehaviour, IHittable
         {
             animator.SetTrigger("Attack");
         }
+        var tempSpeed = moveSpeed;
+        {
+            moveSpeed = 0;
+        }
+        moveSpeed = tempSpeed;
         
         // Deal damage (can be called from animation event instead)
         //DealDamageToPlayer();
@@ -212,6 +217,7 @@ public class EnemyBase : MonoBehaviour, IHittable
         _knockbackTimer = knockbackDuration;
         _knockbackVelocity = hitDirection * knockbackForce;
         _knockbackVelocity.y = 0;
+        animator.Play("Idle");
     }
     
     //Event

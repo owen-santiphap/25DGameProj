@@ -4817,7 +4817,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
-  m_SortMode: 0
+  m_SortMode: 4
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
@@ -4871,4 +4871,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c8a4abcca2ba448b39994b07942cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelfDestruct
-  lifetime: 0.05
+  lifetime: 2

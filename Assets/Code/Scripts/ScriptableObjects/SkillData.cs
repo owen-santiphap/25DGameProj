@@ -32,6 +32,12 @@ public class SkillData : ScriptableObject
     public float deflectDuration = 1.5f;
     [Tooltip("Damage dealt back to the attacker on a successful deflect.")]
     public int deflectDamage = 1;
+    
+    [Header("Dash Settings")]
+    [Tooltip("How far the player will dash.")]
+    public float dashDistance = 5f;
+    [Tooltip("How long the dash movement takes to complete.")]
+    public float dashDuration = 0.25f;
 }
 
 public enum SkillType

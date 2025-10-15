@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,10 +19,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform spriteTransform; // The 2D sprite child object, Character
     [SerializeField] private CharacterController controller;
     [SerializeField] private CombatSystem combat;
+    [SerializeField] private Camera mainCamera;
     
     private Vector2 _moveInput;
     private Vector3 _velocity;
     private bool _isGrounded;
+    private bool _isDashing;
     
     private void Reset()
     {
@@ -58,11 +61,51 @@ public class PlayerController : MonoBehaviour
         _velocity.y += gravity * Time.deltaTime;
         controller.Move(_velocity * Time.deltaTime);
     }
+
+    public void PerformDash(float distance, float duration)
+    {
+        if (_isDashing) return;
+
+        Vector3 dashDirection;
+        
+        if (_moveInput.magnitude >= 0.1f)
+        {
+            var camForward = mainCamera.transform.forward;
+            var camRight = mainCamera.transform.right;
+            
+            camForward.y = 0;
+            camRight.y = 0;
+            
+            dashDirection = (camForward * _moveInput.y + camRight * _moveInput.x).normalized;
+        }
+        else
+        {
+            // Fallback: If standing still, dash in the direction the sprite is facing
+            dashDirection = new Vector3(spriteTransform.localScale.x, 0, 0).normalized;
+        }
+        
+        StartCoroutine(DashCoroutine(dashDirection, distance, duration));
+    }
+
+    private IEnumerator DashCoroutine(Vector3 dashDirection, float distance, float duration)
+    {
+        _isDashing = true;
+        var startTime = Time.time;
+        var dashSpeed = distance / duration;
+
+        while (Time.time < startTime + duration)
+        {
+            controller.Move(dashDirection * (dashSpeed * Time.deltaTime));
+            yield return null; // Wait for the next frame
+        }
+
+        _isDashing = false;
+    }
     
     private void HandleMovement()
     {
-        // Don't move during the attack!!
-        if (combat != null && combat.IsAttacking)
+        // Prevent movement during attacking or dashing
+        if (combat != null && combat.IsAttacking || _isDashing)
         {
             return;
         }

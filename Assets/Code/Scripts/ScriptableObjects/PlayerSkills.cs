@@ -7,18 +7,21 @@ public class PlayerSkills : MonoBehaviour
     [Header("Skill Setup")]
     [SerializeField] private SkillData deflectSkill;
     [SerializeField] private SkillData aimedShotSkill;
+    [SerializeField] private SkillData dashSkill;
     
     public SkillData DeflectSkill => deflectSkill;
     
     [Header("UI References")]
     [SerializeField] private UISkillDisplay deflectSkillUI;
     [SerializeField] private UISkillDisplay aimedShotSkillUI;
+    [SerializeField] private UISkillDisplay dashSkillUI;
     [SerializeField] private GameObject deflectIconPrefab;
     private GameObject _deflectIconInstance;
 
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private Transform skillCastPoint;
+    [SerializeField] private Transform dashContainer;
     [SerializeField] private PlayerController movement;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Camera mainCamera;
@@ -30,6 +33,7 @@ public class PlayerSkills : MonoBehaviour
 
     private float _deflectCooldownTimer;
     private float _aimedShotCooldownTimer;
+    private float _dashCooldownTimer;
     private HealthSystem _healthSystem;
 
     // --- State Management ---
@@ -59,6 +63,11 @@ public class PlayerSkills : MonoBehaviour
         {
             aimedShotSkillUI.SetIcon(aimedShotSkill.icon);
         }
+
+        if (dashSkillUI != null && dashSkill.icon != null)
+        {
+            dashSkillUI.SetIcon(dashSkill.icon);
+        }
     }
 
     private void Update()
@@ -69,8 +78,8 @@ public class PlayerSkills : MonoBehaviour
         if (_isDeflecting)
         {
             _deflectTimer += Time.deltaTime;
-            // --- CHANGE IS HERE ---
-            // Use the new deflectDuration field instead of animationDuration
+            
+            // End deflect according to timer
             if (_deflectTimer >= deflectSkill.deflectDuration)
             {
                 EndDeflect();
@@ -81,6 +90,14 @@ public class PlayerSkills : MonoBehaviour
         if (_isAiming)
         {
             HandleAiming();
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed && !_isAiming && !_isDeflecting && _dashCooldownTimer <= 0)
+        {
+            StartDash();
         }
     }
     
@@ -123,6 +140,29 @@ public class PlayerSkills : MonoBehaviour
     }   
 
     // --- SKILL IMPLEMENTATION ---
+
+    private void StartDash()
+    {
+        _dashCooldownTimer = dashSkill.cooldownTime;
+        animator.Play(dashSkill.animationName, 0, 0f);
+
+        if (dashSkill.effectPrefab != null)
+        {
+            var spawnPosition = transform.position + new Vector3(0, 0.1f, 0);
+            
+            var vfxInstance = Instantiate(dashSkill.effectPrefab, spawnPosition, Quaternion.identity);
+
+            // Check which way the player sprite is facing.
+            if (dashContainer != null && dashContainer.localScale.x < 0)
+            {
+                // If facing left, flip the VFX's scale on the x-axis.
+                vfxInstance.transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+            // No 'else' is needed, as the prefab's default scale (1, 1, 1) is correct for facing right.
+        }
+    
+        movement.PerformDash(dashSkill.dashDistance, dashSkill.dashDuration);
+    }
 
     private void StartDeflect()
     {
@@ -230,6 +270,10 @@ public class PlayerSkills : MonoBehaviour
 
     private void UpdateCooldowns()
     {
+        if (_dashCooldownTimer > 0)
+        {
+            _dashCooldownTimer -= Time.deltaTime;
+        }
         if (_deflectCooldownTimer > 0)
         {
             _deflectCooldownTimer -= Time.deltaTime;
@@ -240,6 +284,10 @@ public class PlayerSkills : MonoBehaviour
         }
 
         // Update the UI displays
+        if (dashSkillUI != null)
+        {
+            dashSkillUI.UpdateCooldown(_dashCooldownTimer, dashSkill.cooldownTime);
+        }
         if (deflectSkillUI != null)
         {
             deflectSkillUI.UpdateCooldown(_deflectCooldownTimer, deflectSkill.cooldownTime);

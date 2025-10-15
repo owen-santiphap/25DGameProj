@@ -4929,4 +4929,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c8a4abcca2ba448b39994b07942cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelfDestruct
-  lifetime: 0.05
+  lifetime: 2
