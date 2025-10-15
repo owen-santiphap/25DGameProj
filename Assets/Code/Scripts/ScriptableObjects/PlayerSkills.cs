@@ -101,8 +101,6 @@ public class PlayerSkills : MonoBehaviour
         }
     }
     
-
-    // Bound to Q / L1 for a single press
     public void OnDeflect(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -116,17 +114,14 @@ public class PlayerSkills : MonoBehaviour
             StartDeflect();
         }
     }
-
-    // Bound to E / R1 for hold and release
+    
     public void OnAimedShot(InputAction.CallbackContext context)
     {
-        // When the button is first pressed, start aiming
         if (context.started && !_isDeflecting && !_isAiming && _aimedShotCooldownTimer <= 0)
         {
             StartAiming();
         }
         
-        // When the button is released, fire the projectile
         if (context.canceled && _isAiming)
         {
             FireAimedProjectile(); // Fire the shot instead of just ending the aim
