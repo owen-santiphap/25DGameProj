@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4928697525701246321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8174225459113826114}
+  m_Layer: 7
+  m_Name: ProjectilePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8174225459113826114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4928697525701246321}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.29, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6661678617122812126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6235590115826622191
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,11 +41,11 @@ GameObject:
   m_Component:
   - component: {fileID: 727954654744793378}
   - component: {fileID: 5481803506078992245}
-  - component: {fileID: 8008238100648171544}
-  - component: {fileID: 6313648301135040452}
-  - component: {fileID: 2606165466296366441}
+  - component: {fileID: 1690502432146238734}
   - component: {fileID: 127569170171478379}
   - component: {fileID: 8166625489441505607}
+  - component: {fileID: 6313648301135040452}
+  - component: {fileID: 2606165466296366441}
   m_Layer: 7
   m_Name: EnemyMageOBJ
   m_TagString: Enemy
@@ -65,7 +96,7 @@ MonoBehaviour:
   OnHealed:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8008238100648171544
+--- !u!114 &1690502432146238734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,50 +105,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6235590115826622191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3689a872ed87b74c83d70c48b0d71c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 70dd0935ce43a8a42b5f5387c1debc94, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  detectionRange: 100
-  attackRange: 62.49
+  m_EditorClassIdentifier: Assembly-CSharp::RangeEnemy
+  detectionRange: 150
+  attackRange: 90
   attackCooldown: 2
   attackDamage: 1
-  moveSpeed: 5
-  rotationSpeed: 2
+  moveSpeed: 3
+  rotationSpeed: 5
   gravity: -9.81
-  groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  knockbackForce: 100
+  knockbackForce: 50
   knockbackDuration: 0.3
   animator: {fileID: 8522392214308681661}
   spriteTransform: {fileID: 727954654744793378}
   deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
   warningIndicator: {fileID: 0}
---- !u!210 &6313648301135040452
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235590115826622191}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_SortAtRoot: 1
---- !u!114 &2606165466296366441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235590115826622191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::billboard
+  projectilePrefab: {fileID: 2022706469521347799, guid: f44b035a31d42e64ea5512614dc636c4, type: 3}
+  projectileSpawnPoint: {fileID: 8174225459113826114}
 --- !u!114 &127569170171478379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +171,30 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.8, z: 0}
+--- !u!210 &6313648301135040452
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235590115826622191}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
+  m_SortAtRoot: 1
+--- !u!114 &2606165466296366441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235590115826622191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::billboard
 --- !u!1001 &7219965682141738843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,7 +301,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4053646350053148549, guid: 98e702cbdce1cfb429d02d723f1f714e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8174225459113826114}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6139144981778675912, guid: 98e702cbdce1cfb429d02d723f1f714e, type: 3}
       insertIndex: -1

@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // To restart the game
+using UnityEngine.SceneManagement; // Make sure this is included
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     [Header("Game Settings")]
-    [SerializeField] private float gameTimerDuration = 120f; // 2 minutes
+    [SerializeField] private float gameTimerDuration = 120f;
 
     [Header("UI References")]
     [SerializeField] private UIManager uiManager;
@@ -26,30 +26,57 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: if you want it to persist across scenes
+            DontDestroyOnLoad(gameObject);
         }
     }
-
-    private void Start()
+    
+    private void OnEnable()
     {
-        CurrentTime = gameTimerDuration;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+  
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeGame();
+    }
+    
+    public void RegisterUIManager(UIManager manager)
+    {
+        uiManager = manager;
         _highScore = PlayerPrefs.GetInt("HighScore", 0);
+        uiManager.UpdateScore(Score);
+        uiManager.UpdateTimer(CurrentTime);
         uiManager.UpdateHighScore(_highScore);
-
-        // Find the player and subscribe to their death event
+    }
+    
+    private void InitializeGame()
+    {
+        _isGameOver = false;
+        Score = 0;
+        CurrentTime = gameTimerDuration;
+        
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
+            player.GetComponent<HealthSystem>().OnDeath.RemoveListener(OnPlayerDied);
             player.GetComponent<HealthSystem>().OnDeath.AddListener(OnPlayerDied);
         }
     }
-
+    
     private void Update()
     {
         if (_isGameOver) return;
 
         CurrentTime -= Time.deltaTime;
-        uiManager.UpdateTimer(CurrentTime);
+        if (uiManager != null)
+        {
+            uiManager.UpdateTimer(CurrentTime);
+        }
 
         if (CurrentTime <= 0)
         {
@@ -61,7 +88,10 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameOver) return;
         Score += amount;
-        uiManager.UpdateScore(Score);
+        if (uiManager != null)
+        {
+            uiManager.UpdateScore(Score);
+        }
     }
 
     private void OnPlayerDied()
@@ -72,7 +102,7 @@ public class GameManager : MonoBehaviour
     private void GameOver(string reason)
     {
         _isGameOver = true;
-        Time.timeScale = 0f; // Pause the game
+        Time.timeScale = 0f;
 
         if (Score > _highScore)
         {
@@ -80,20 +110,15 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", _highScore);
         }
 
-        uiManager.ShowGameOverScreen(reason, Score, _highScore);
+        if (uiManager != null)
+        {
+            uiManager.ShowGameOverScreen(reason, Score, _highScore);
+        }
     }
     
-    // Call this from a UI button to restart
     public void RestartGame()
     {
-        if (!_isGameOver) return;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void MainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
     }
 }

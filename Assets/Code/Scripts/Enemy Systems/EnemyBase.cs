@@ -16,7 +16,7 @@ public class EnemyBase : MonoBehaviour, IHittable
     
     [Header("Gravity")]
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
+    //[SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     private Vector3 _velocity;
     private bool _isGrounded;

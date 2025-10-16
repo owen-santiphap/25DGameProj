@@ -189,7 +189,6 @@ MonoBehaviour:
   moveSpeed: 10
   rotationSpeed: 2
   gravity: -9.81
-  groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 256

@@ -13,6 +13,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverReasonText;
     [SerializeField] private TMP_Text finalScoreText;
     [SerializeField] private TMP_Text highScoreText;
+    
+    private void Awake()
+    {
+        // Find the persistent GameManager and register this UIManager with it.
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.RegisterUIManager(this);
+        }
+
+        // Initialize the UI state for the new scene
+        gameOverPanel.SetActive(false);
+    }
 
     private void Start()
     {
