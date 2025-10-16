@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7356a49645d4c4446a287ad0a057c9bb, type: 3}
+  m_Name: Deflect
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillName: Deflect
+  description: 
+  icon: {fileID: 21300000, guid: b7d6be744f3bdd745ba86b4936c5aa10, type: 3}
+  animationName: 
+  animationDuration: 0
+  cooldownTime: 9
+  damage: 0
+  range: 5
+  effectPrefab: {fileID: 5167330809984128283, guid: f86a04cdab90c4d4c895ceea1efc6ea6, type: 3}
+  canMoveWhileCasting: 0
+  movementSpeedMultiplier: 0
+  deflectDuration: 0.35
+  deflectDamage: 20
+  dashDistance: 5
+  dashDuration: 0.25
