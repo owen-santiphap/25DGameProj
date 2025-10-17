@@ -2304,7 +2304,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1272983407}
   - component: {fileID: 1272983409}
-  - component: {fileID: 1272983410}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2341,92 +2340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameTimerDuration: 200
   uiManager: {fileID: 675927186}
---- !u!114 &1272983410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272983406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 2e4a799a4d521794da0e76488a1fedf8, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 51a302c4-2a67-4dd4-867a-55c987a48382
-    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 28f25cbf-1720-4d8f-8867-baf941ba976e
-    m_ActionName: 'Player/Attack[/Keyboard/j,/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c410b29a-c9ba-40bd-9ff3-b70921137517
-    m_ActionName: 'Player/Aim[/Mouse/position]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9dce300a-df0e-46bf-8618-e5ca803d77e4
-    m_ActionName: 'Player/SkillProjectile[/Mouse/rightButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9a4695f9-97dc-4369-bc23-34f42fa65a90
-    m_ActionName: 'Player/SkillDeflect[/Keyboard/r]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cbdb6f53-b05c-46e8-b1db-64b0e14ab135
-    m_ActionName: 'Player/Dash[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1272983409}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9d7b08a3-026d-4dd5-9953-a64d1cf718fd
-    m_ActionName: 'Player/Restart[/Keyboard/rightBracket]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1272983409}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReturnMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3369dcf7-5cd3-4bdd-bb37-8cf419b88247
-    m_ActionName: 'Player/ReturnMenu[/Keyboard/leftBracket]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1284958832
 GameObject:
   m_ObjectHideFlags: 0
@@ -3762,6 +3675,7 @@ GameObject:
   - component: {fileID: 8864300610308758871}
   - component: {fileID: 8864300610308758872}
   - component: {fileID: 8864300610308758874}
+  - component: {fileID: 8864300610308758875}
   m_Layer: 6
   m_Name: PlayerCharacterOBJ
   m_TagString: Player
@@ -3991,13 +3905,37 @@ MonoBehaviour:
     m_ActionId: cbdb6f53-b05c-46e8-b1db-64b0e14ab135
     m_ActionName: 'Player/Dash[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9d7b08a3-026d-4dd5-9953-a64d1cf718fd
-    m_ActionName: 'Player/Restart[/Keyboard/f5]'
+      m_Calls:
+      - m_Target: {fileID: 8864300610308758875}
+        m_TargetAssemblyTypeName: InputRelay, Assembly-CSharp
+        m_MethodName: OnRestart
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d44cdcd6-ce73-44df-a369-fc35885f621c
+    m_ActionName: 'Player/Restart[/Keyboard/rightBracket]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3369dcf7-5cd3-4bdd-bb37-8cf419b88247
-    m_ActionName: 'Player/ReturnMenu[/Keyboard/f6]'
+      m_Calls:
+      - m_Target: {fileID: 8864300610308758875}
+        m_TargetAssemblyTypeName: InputRelay, Assembly-CSharp
+        m_MethodName: OnMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ecf999fe-6fa0-47a8-9a00-c85a385b15c6
+    m_ActionName: 'Player/ReturnMenu[/Keyboard/leftBracket]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4057,6 +3995,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465c66e8494dc214e8660478acb9b63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
+--- !u!114 &8864300610308758875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864300610308758865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3264fd66212d434ba4c937851258f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

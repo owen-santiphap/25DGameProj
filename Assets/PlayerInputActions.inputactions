@@ -63,7 +63,7 @@
                 {
                     "name": "Restart",
                     "type": "Button",
-                    "id": "9d7b08a3-026d-4dd5-9953-a64d1cf718fd",
+                    "id": "d44cdcd6-ce73-44df-a369-fc35885f621c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -72,7 +72,7 @@
                 {
                     "name": "ReturnMenu",
                     "type": "Button",
-                    "id": "3369dcf7-5cd3-4bdd-bb37-8cf419b88247",
+                    "id": "ecf999fe-6fa0-47a8-9a00-c85a385b15c6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -368,7 +368,7 @@
                 },
                 {
                     "name": "",
-                    "id": "3fa04193-6cdc-41e6-934e-6d519d9811c8",
+                    "id": "47ac82f1-47fa-4de3-9ec5-2ce33a823f08",
                     "path": "<Keyboard>/rightBracket",
                     "interactions": "",
                     "processors": "",
@@ -379,7 +379,7 @@
                 },
                 {
                     "name": "",
-                    "id": "40a2a60a-cd29-43a4-b1e7-02f38f245c5d",
+                    "id": "0329d901-295c-49e6-904e-3c6b1f4e47a7",
                     "path": "<Keyboard>/leftBracket",
                     "interactions": "",
                     "processors": "",
