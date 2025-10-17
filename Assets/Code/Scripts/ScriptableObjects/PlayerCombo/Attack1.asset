@@ -17,9 +17,9 @@ MonoBehaviour:
   comboWindowStart: 0.3
   comboWindowEnd: 0.5
   damage: 15
-  attackRange: 7
+  attackRange: 5
   attackOffset: {x: 0, y: 0, z: 0}
   canMove: 0
   movementSpeedMultiplier: 0
-  forwardMovement: 50
+  forwardMovement: 80
   attackVFX: {fileID: 0}

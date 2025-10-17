@@ -24,6 +24,6 @@ MonoBehaviour:
   canMoveWhileCasting: 0
   movementSpeedMultiplier: 0
   deflectDuration: 0.35
-  deflectDamage: 20
+  deflectDamage: 100
   dashDistance: 5
   dashDuration: 0.25

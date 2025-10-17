@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed293ea57ac04742b46d3e0361df616, type: 3}
   m_Name: MageEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWaveData
-  enemyPrefab: {fileID: 6235590115826622191, guid: 113eee8e9221c584d99fa1d700385e7c, type: 3}
+  enemyPrefab: {fileID: 960166874403570025, guid: 91f801d55b0cca7498db7044724cba23, type: 3}
   scoreValue: 10
-  maxConcurrentSpawns: 5
-  spawnInterval: 3
+  maxConcurrentSpawns: 10
+  spawnInterval: 15

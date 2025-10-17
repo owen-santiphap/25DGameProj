@@ -182,22 +182,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3689a872ed87b74c83d70c48b0d71c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  detectionRange: 36.2
-  attackRange: 15
+  detectionRange: 600
+  attackRange: 17
   attackCooldown: 2
   attackDamage: 1
+  hyperArmor: 1
   moveSpeed: 10
   rotationSpeed: 2
   gravity: -9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  knockbackForce: 100
-  knockbackDuration: 0.3
+  knockbackForce: 0
+  knockbackDuration: 0
   animator: {fileID: 4883945606834898600}
   spriteTransform: {fileID: 7319201087929069517}
   deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
   warningIndicator: {fileID: 1264411967329272518}
+  mageProjectilePrefab: {fileID: 0}
+  projectileSpawnPoint: {fileID: 7319201087929069517}
 --- !u!210 &3608161778280208690
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -236,8 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusEffect
   stacksToExplode: 3
   explosionVFX: {fileID: 7739029962760493951, guid: 0cf1bbb7e5f61ed4783a7bb0095b670b, type: 3}
-  explosionRadius: 5
-  explosionDamage: 10
+  explosionRadius: 12
+  explosionDamage: 20
   damageLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -348,7 +351,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.27450982}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

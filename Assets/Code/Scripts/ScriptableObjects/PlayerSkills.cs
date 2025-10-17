@@ -170,28 +170,30 @@ public class PlayerSkills : MonoBehaviour
         movement.enabled = false; // This correctly stops the player from moving
         _healthSystem.IsDeflecting = true;
         animator.Play(deflectSkill.animationName, 0, 0f);
-
-        // --- Spawn the icon above the player ---
-        if (deflectIconPrefab != null)
-        {
-            // Position it 2 units above the player's pivot point
-            var iconPosition = transform.position + Vector3.up * 2f;
-            _deflectIconInstance = Instantiate(deflectIconPrefab, iconPosition, Quaternion.identity, transform);
-        }
     }
 
+    public void DeflectEffect()
+    {
+        Debug.Log("DeflectEffect called!");
+
+        if (deflectIconPrefab != null)
+        {
+            var iconPosition = transform.position;// + Vector3.up * 2f;
+            _deflectIconInstance = Instantiate(deflectIconPrefab, iconPosition, Quaternion.identity, transform);
+
+            // --- Destroy the icon ---
+            if (_deflectIconInstance != null)
+            {
+                Destroy(_deflectIconInstance, 0.55f);
+            }
+        }
+    }
     private void EndDeflect()
     {
         _isDeflecting = false;
         _healthSystem.IsDeflecting = false;
         movement.enabled = true; // This correctly allows the player to move again
         animator.Play("Idle");
-
-        // --- Destroy the icon ---
-        if (_deflectIconInstance != null)
-        {
-            Destroy(_deflectIconInstance);
-        }
     }
 
     private void StartAiming()

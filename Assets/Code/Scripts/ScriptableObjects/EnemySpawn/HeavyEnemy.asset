@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWaveData
   enemyPrefab: {fileID: 2137687800389226555, guid: 57cb48145f6a07246993627edfbde51d, type: 3}
   scoreValue: 10
-  maxConcurrentSpawns: 5
-  spawnInterval: 3
+  maxConcurrentSpawns: 7
+  spawnInterval: 15

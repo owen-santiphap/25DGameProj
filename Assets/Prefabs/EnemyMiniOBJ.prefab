@@ -77,22 +77,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3689a872ed87b74c83d70c48b0d71c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  detectionRange: 100
-  attackRange: 7.77
+  detectionRange: 600
+  attackRange: 8
   attackCooldown: 2
   attackDamage: 1
-  moveSpeed: 10
+  hyperArmor: 0
+  moveSpeed: 28
   rotationSpeed: 2
   gravity: -9.81
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  knockbackForce: 100
+  knockbackForce: 20
   knockbackDuration: 0.3
   animator: {fileID: 8866900423723773862}
   spriteTransform: {fileID: 5925891312618165242}
   deathVFX: {fileID: 236815798738599985, guid: e3ac11e63672bd343a201ccecaddd896, type: 3}
   warningIndicator: {fileID: 0}
+  mageProjectilePrefab: {fileID: 0}
+  projectileSpawnPoint: {fileID: 5925891312618165242}
 --- !u!210 &218153990044740633
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -119,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusEffect
   stacksToExplode: 3
   explosionVFX: {fileID: 7739029962760493951, guid: 0cf1bbb7e5f61ed4783a7bb0095b670b, type: 3}
-  explosionRadius: 5
+  explosionRadius: 12
   explosionDamage: 10
   damageLayer:
     serializedVersion: 2

@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 842880919190292558}
   - {fileID: 511186069715229445}
@@ -63,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: e9d62afa670bdc144ac6ee7372662335, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,10 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788f1b01c7af5a1468365c37d4a65b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
-  speed: 15
+  speed: 35
   damage: 1
   lifetime: 5
   hitVFX: {fileID: 7684797404938231464, guid: 86e8653ed9df82048aba08477ef300ce, type: 3}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &422447853089801170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +318,10 @@ PrefabInstance:
       propertyPath: m_SortMode
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3702617171330081202, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e9d62afa670bdc144ac6ee7372662335, type: 2}
     - target: {fileID: 4502842178409957517, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -354,6 +361,30 @@ PrefabInstance:
     - target: {fileID: 4502842178409957517, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617238760210809024, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617238760210809024, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617238760210809024, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617238760210809024, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617238760210809024, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617238760210809024, guid: 887bb85cf9760844d8ede68035d85652, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

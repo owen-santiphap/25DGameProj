@@ -9,7 +9,8 @@ public class EnemyBase : MonoBehaviour, IHittable
     [SerializeField] protected float attackRange = 2f;
     [SerializeField] protected float attackCooldown = 2f;
     [SerializeField] protected int attackDamage = 1;
-    
+    [SerializeField] protected bool hyperArmor = false;
+
     [Header("Movement")]
     [SerializeField] protected float moveSpeed = 3f;
     [SerializeField] protected float rotationSpeed = 5f;
@@ -30,7 +31,11 @@ public class EnemyBase : MonoBehaviour, IHittable
     [SerializeField] protected Transform spriteTransform;
     [SerializeField] protected GameObject deathVFX;
     [SerializeField] protected GameObject warningIndicator;
-    
+
+    [Header("Ranged Attack Settings")]
+    [SerializeField] private GameObject mageProjectilePrefab;
+    [SerializeField] private Transform projectileSpawnPoint;
+
     protected bool IsWarning = false;
     protected HealthSystem HealthSystem;
     protected Transform PlayerTransform;
@@ -161,7 +166,7 @@ public class EnemyBase : MonoBehaviour, IHittable
         {
             transform.position += direction * moveSpeed * Time.deltaTime;
         }
-        
+
         // Flip sprite
         FlipSprite(direction);
     }
@@ -214,7 +219,8 @@ public class EnemyBase : MonoBehaviour, IHittable
                 if (playerSkills != null && playerSkills.IsDeflecting)
                 {
                     Debug.Log("Player Deflected! Enemy takes damage.");
-                    
+                    playerSkills.DeflectEffect();
+
                     var deflectData = playerSkills.DeflectSkill; 
                     var damageToTake = (deflectData != null) ? deflectData.deflectDamage : 1;
                     
@@ -231,6 +237,23 @@ public class EnemyBase : MonoBehaviour, IHittable
         }
     }
 
+    public virtual void FireProjectile()
+    {
+        if (mageProjectilePrefab == null || projectileSpawnPoint == null || PlayerTransform == null)
+        {
+            return;
+        }
+
+        var directionToPlayer = (PlayerTransform.position - projectileSpawnPoint.position).normalized;
+
+        var projectileGO = Instantiate(mageProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+
+        var projectile = projectileGO.GetComponent<EnemyProjectile>();
+        if (projectile != null)
+        {
+            projectile.Initialize(directionToPlayer);
+        }
+    }
     protected virtual void FlipSprite(Vector3 direction)
     {
         if (spriteTransform != null && direction.x != 0)
@@ -248,8 +271,11 @@ public class EnemyBase : MonoBehaviour, IHittable
         _knockbackTimer = knockbackDuration;
         _knockbackVelocity = hitDirection * knockbackForce;
         _knockbackVelocity.y = 0;
-        animator.Play("Idle");
-        CancelWarning();
+        if(hyperArmor == false)
+        {
+            animator.Play("Idle");
+            CancelWarning();
+        }
     }
     
     //Event

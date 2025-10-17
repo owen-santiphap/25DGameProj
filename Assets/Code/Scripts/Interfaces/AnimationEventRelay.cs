@@ -76,4 +76,12 @@ public class AnimationEventRelay : MonoBehaviour
             _enemyBase.DealDamageToPlayer();
         }
     }
+
+    public void ShootProjectile()
+    {
+        if (_enemyBase != null)
+        {
+            _enemyBase.FireProjectile();
+        }
+    }
 }
