@@ -1591,6 +1591,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668185800}
   m_CullTransparentMesh: 1
+--- !u!1 &675927184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675927185}
+  - component: {fileID: 675927186}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675927185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675927184}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675927186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675927184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064a4332f3187d54a9482d5130b145d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  scoreText: {fileID: 1864976009}
+  timerText: {fileID: 1806069040}
+  gameOverPanel: {fileID: 387208688}
+  gameOverReasonText: {fileID: 585477840}
+  finalScoreText: {fileID: 668185802}
+  highScoreText: {fileID: 1706831861}
 --- !u!1 &733470268
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameTimerDuration: 200
-  uiManager: {fileID: 1272983410}
+  uiManager: {fileID: 675927186}
 --- !u!114 &1272983410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,15 +2350,83 @@ MonoBehaviour:
   m_GameObject: {fileID: 1272983406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 064a4332f3187d54a9482d5130b145d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  scoreText: {fileID: 1864976009}
-  timerText: {fileID: 1806069040}
-  gameOverPanel: {fileID: 387208688}
-  gameOverReasonText: {fileID: 585477840}
-  finalScoreText: {fileID: 668185802}
-  highScoreText: {fileID: 1706831861}
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 2e4a799a4d521794da0e76488a1fedf8, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 51a302c4-2a67-4dd4-867a-55c987a48382
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 28f25cbf-1720-4d8f-8867-baf941ba976e
+    m_ActionName: 'Player/Attack[/Keyboard/j,/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c410b29a-c9ba-40bd-9ff3-b70921137517
+    m_ActionName: 'Player/Aim[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9dce300a-df0e-46bf-8618-e5ca803d77e4
+    m_ActionName: 'Player/SkillProjectile[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a4695f9-97dc-4369-bc23-34f42fa65a90
+    m_ActionName: 'Player/SkillDeflect[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cbdb6f53-b05c-46e8-b1db-64b0e14ab135
+    m_ActionName: 'Player/Dash[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1272983409}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9d7b08a3-026d-4dd5-9953-a64d1cf718fd
+    m_ActionName: 'Player/Restart[/Keyboard/rightBracket]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1272983409}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ReturnMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3369dcf7-5cd3-4bdd-bb37-8cf419b88247
+    m_ActionName: 'Player/ReturnMenu[/Keyboard/leftBracket]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1284958832
 GameObject:
   m_ObjectHideFlags: 0
@@ -3319,7 +3437,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20000
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3873,35 +3991,11 @@ MonoBehaviour:
     m_ActionId: cbdb6f53-b05c-46e8-b1db-64b0e14ab135
     m_ActionName: 'Player/Dash[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1272983409}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 9d7b08a3-026d-4dd5-9953-a64d1cf718fd
     m_ActionName: 'Player/Restart[/Keyboard/f5]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1272983409}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: MainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 3369dcf7-5cd3-4bdd-bb37-8cf419b88247
     m_ActionName: 'Player/ReturnMenu[/Keyboard/f6]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -3973,6 +4067,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1812717567}
   - {fileID: 2117840798}
+  - {fileID: 675927185}
   - {fileID: 292696407}
   - {fileID: 733470269}
   - {fileID: 1406423844}
